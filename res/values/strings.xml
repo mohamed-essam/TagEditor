@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">TagEditor</string>
+    <!-- Main Activity -->
+    <string name="app_name">Tag Editor</string>
+    <string name="Open">Open</string>
+    <string name="Lyrics">Lyrics</string>
+    <string name="Save">Save</string>
+    <string name="AutoFill">Auto Fill</string>
+    <string name="GetAlbumArt">Get Album Art</string>
 
+    <!-- Shared -->
+    <string name="Title">Title</string>
+    <string name="Artist">Artist</string>
+    <string name="Album">Album</string>
+    <string name="AlbumArt">Album Art</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="GetMusic">Get MP3</string>
+    <string name="title_activity_file_browser">File Navigator</string>
+    <string name="title_activity_get_music">Get Music</string>
+
+    <!-- File Search Dialog -->
+    <string name="minbitrate">Minimum bitrate</string>
+    <string name="minsize">Minimum size</string>
+    <string name="minlength">Minimum length</string>
+    <string name="colon">:</string>
+    
+    <!-- Text Default Values -->
+    <string name="BitrateDefaultValue">128</string>
+    <string name="SizeDefaultValue">2</string>
+    <string name="LengthMinutesDefaultValue">1</string>
+    <string name="LengthSecondsDefaultValue">0</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings Activity -->
+    <string name="DefaultPath">Default Music Path</string>
 </resources>

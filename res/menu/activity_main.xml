@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_open"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/Open"/>
+	
+    <item
+        android:id="@+id/menu_save"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/Save"
+        />
+    
+    <item 
+        android:id="@+id/menu_autofill"
+        android:orderInCategory="102"
+        android:showAsAction="never"
+        android:title="@string/AutoFill"
+        />
+    
+    <item 
+        android:id="@+id/menu_art"
+        android:orderInCategory="103"
+        android:showAsAction="never"
+        android:title="@string/GetAlbumArt"
+        android:enabled="false"
+        android:visible="false"
+        />
+    
+    <item
+        android:id="@+id/menu_getsongs"
+        android:orderInCategory="104"
+        android:showAsAction="never"
+        android:title="@string/GetMusic" />
+    
+    <item android:id="@+id/menu_settings"
+        android:orderInCategory="105"
+        android:showAsAction="never"
+        android:title="@string/menu_settings" />
+</menu>

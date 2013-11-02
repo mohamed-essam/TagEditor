@@ -4,21 +4,55 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk 
-        android:minSdkVersion="8" 
-        android:targetSdkVersion="11" />
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
         <activity
+            android:name="com.me.tageditor.Main.MainActivity"
             android:label="@string/app_name"
-            android:name=".MainActivity" >
-            <intent-filter >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.me.tageditor.AlbumArt.AlbumArtChooser"
+            android:label="@string/GetAlbumArt"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="com.me.tageditor.FileBrowser.FileBrowser"
+            android:label="@string/title_activity_file_browser" >
+        </activity>
+        
+        <activity
+            android:name="com.me.tageditor.getMP3.GetMusic"
+            android:label="@string/title_activity_get_music"
+            android:parentActivityName="com.me.tageditor.Main.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.me.tageditor.Main.MainActivity" />
+        </activity>
+        
+        <activity
+            android:name="com.me.tageditor.settings.Settings"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
