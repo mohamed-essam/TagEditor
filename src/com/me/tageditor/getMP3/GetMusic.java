@@ -88,7 +88,7 @@ public class GetMusic extends Activity {
 				
 				@Override
 				public void onCancel(DialogInterface arg0) {
-					task.cancel(false);
+					task.cancel(true);
 					setResult(RESULT_CANCELED);
 					finish();
 				}
@@ -159,6 +159,9 @@ public class GetMusic extends Activity {
 			Elements SongsListDiv = null;
 			try{
 				SongsListDiv = SearchDoc.getElementsByAttributeValue("id", "song_html");
+				if(SongsListDiv == null){
+					throw new Exception();
+				}
 			}
 			catch(Exception e){
 				try{
@@ -175,6 +178,9 @@ public class GetMusic extends Activity {
 						e.printStackTrace();
 					}
 					SongsListDiv = SearchDoc.getElementsByAttributeValue("id", "song_html");
+					if(SongsListDiv == null){
+						throw new Exception();
+					}
 				} catch (Exception ee){
 					ee.printStackTrace();
 					if(SearchDoc.text().contains("The content was removed due to copyrights owners' request."))
@@ -325,18 +331,19 @@ public class GetMusic extends Activity {
 		protected void onPostExecute(String result){
 			if(songs != null){
 				if(songs.size() == 0){
-					Toast.makeText(ActivityInstance, "No Results Found!", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(ActivityInstance, "No Results Found!", Toast.LENGTH_SHORT).show();
+					dialog.dismiss();
+					setResult(RESULT_CANCELED);
+					finish();
 					return;
 				}
 				FilesListAdapter adapter = new FilesListAdapter(songs);
 				adapter.context = ActivityInstance;
 				list.setAdapter(adapter);
 			}
-			else{
-				Toast.makeText(ActivityInstance, "No Results Found!", Toast.LENGTH_SHORT).show();
-				return;
-			}
 			dialog.dismiss();
+			setResult(RESULT_CANCELED);
+			finish();
 		}
 		
 	}

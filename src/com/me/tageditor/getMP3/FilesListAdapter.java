@@ -53,18 +53,25 @@ public class FilesListAdapter extends BaseAdapter implements ListAdapter {
 
 	@Override
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		if(arg1 != null)
+			return arg1;
 		SongClass wanted = songs.get(arg0);
+		
 		TextView Title = new TextView(context);
 		Title.setText(wanted.Title);
+		Title.setTextSize(18);
+		
 		TextView OtherData = new TextView(context);
 		String otherText = "Length: " + wanted.Length + " Size: " + wanted.Size + " Bitrate: " + wanted.Bitrate;
 		OtherData.setText(otherText);
+		
 		LinearLayout layout = new LinearLayout(context);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		layout.addView(Title);
 		layout.addView(OtherData);
 		layout.setId(arg0);
 		layout.setOnClickListener(listener);
+		
 		return layout;
 	}
 
