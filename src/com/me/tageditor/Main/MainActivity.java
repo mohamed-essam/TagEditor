@@ -51,6 +51,7 @@ import com.me.tageditor.FileBrowser.FileBrowser;
 import com.me.tageditor.getMP3.GetMusic;
 import com.me.tageditor.settings.Settings;
 import com.me.tageditor.settings.SettingsContainer;
+import java.io.*;
 
 public class MainActivity extends Activity {
 
@@ -294,6 +295,43 @@ public class MainActivity extends Activity {
 
 	private void initializeSettings() {
 		SettingsContainer.Load(this);
+	}
+	
+	protected String moveToCorrectLocation(){
+		try
+		{
+			File oldF = new File(SettingsContainer.SettingsValues.get("DP") + "/.temp/downloadFile.mp3");
+			AudioFile tmp = AudioFileIO.read(oldF);
+			Tag tag = tmp.getTag();
+			String artist = tag.getFirst(FieldKey.ARTIST);
+			String title = tag.getFirst(FieldKey.TITLE);
+			
+			File newF = new File(SettingsContainer.SettingsValues.get("DP") + "/" + artist + "/" + title +".mp3");
+			FileInputStream in = new FileInputStream(oldF);
+			new File(newF.getParent()).mkdirs();
+			FileOutputStream out = new FileOutputStream(newF);
+			
+			byte[] buffer = new byte[4096];
+			int count = 0;
+			
+			while((count = in.read(buffer)) != -1){
+				out.write(buffer, 0, count);
+			}
+			
+			oldF.delete();
+			return newF.getPath();
+		}
+		catch (InvalidAudioFrameException e)
+		{}
+		catch (CannotReadException e)
+		{}
+		catch (IOException e)
+		{}
+		catch (TagException e)
+		{}
+		catch (ReadOnlyFileException e)
+		{}
+		return null;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -592,14 +630,16 @@ public class MainActivity extends Activity {
 
 				final DownloadTask task = new DownloadTask(ActivityInstance);
 				
+				String music = SettingsContainer.SettingsValues.get("DP") + "/.temp/downloadFile.mp3";
+				task.execute(data.getStringExtra("HREF"), music);
 				
 				
-				task.execute(data.getStringExtra("HREF"), Environment
-						.getExternalStorageDirectory().getPath()
-						+ "/music/"
-						+ data.getStringExtra("artist")
-						+ "/"
-						+ data.getStringExtra("title") + ".mp3");
+				//task.execute(data.getStringExtra("HREF"), Environment
+				//		.getExternalStorageDirectory().getPath()
+				//		+ "/music/"
+				//		+ data.getStringExtra("artist")
+				//		+ "/"
+				//		+ data.getStringExtra("title") + ".mp3");
 				DownloadDialog.setOnCancelListener(new OnCancelListener() {
 
 					@Override

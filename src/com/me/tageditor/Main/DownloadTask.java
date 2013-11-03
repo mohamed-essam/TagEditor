@@ -54,7 +54,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 				if(response.getStatusLine().getStatusCode() != 200){
 					if(wl.isHeld())
 						wl.release();
-					return "Server: " + response.getStatusLine().getStatusCode() + " : " + response.getStatusLine().getReasonPhrase();
+					return "Error Server: " + response.getStatusLine().getStatusCode() + " : " + response.getStatusLine().getReasonPhrase();
 				}
 				
 				
@@ -76,7 +76,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 						is.close();
 						if(wl.isHeld())
 							wl.release();
-						return "Cancelled";
+						return "Error Cancelled";
 					}
 					total += count;
 					if(fileLength > 0){
@@ -104,11 +104,12 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 			e.printStackTrace();
 			if(wl.isHeld())
 				wl.release();
-			return e.getMessage();
+			return "Error " + e.getMessage();
 		}
 		if(wl.isHeld())
 			wl.release();
-		return "Success";
+		return context.moveToCorrectLocation();
+		//return "Success";
 	}
 
 	
@@ -130,15 +131,15 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 	
 	@Override
 	protected void onPostExecute(String result){
-		if(!result.contains("Success")){
+		if(result.contains("Error")){
 			Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 		}
 		else{
-			Toast.makeText(context, path, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
 		}
 		context.DownloadDialog.dismiss();
 		
-		context.openFile(new File(path));
+		context.openFile(new File(result));
 	}
 	
 }

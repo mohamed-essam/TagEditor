@@ -341,9 +341,12 @@ public class GetMusic extends Activity {
 				adapter.context = ActivityInstance;
 				list.setAdapter(adapter);
 			}
+			else{
+				
+				setResult(RESULT_CANCELED);
+				finish();
+			}
 			dialog.dismiss();
-			setResult(RESULT_CANCELED);
-			finish();
 		}
 		
 	}
